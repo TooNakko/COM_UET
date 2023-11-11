@@ -1,7 +1,6 @@
 import serial
 import serial
 import Read_and_Write as RaW
-import Arrays_generator as Ag
 import time
 import random
 import os
@@ -11,7 +10,7 @@ import os
 
 i = 0
 while i<1000:
-    message = round(float(random.random() * 10),3)
+    message = round(float(random.random() * 10),5)
     RaW.WriteIntoSerialCom('COM2', str(message)+'\n')
     #print("Value {0} is written\n".format(message))
     time.sleep(0.05)                                    #Adjust this base on your device's spec so it's sync as much as possible

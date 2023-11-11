@@ -5,7 +5,7 @@ import time
 import Read_and_Write as RaW
 from datetime import datetime
 
-plt.figure(figsize=(12, 4))
+plt.figure(figsize=(16, 4))
 plt.ion()
 plt.show()
 
@@ -22,7 +22,7 @@ while True:
     #content = serial_com.readline()
     #content.decode()
     try:
-        formatted_content = float(content[0:4])
+        formatted_content = float(content[0:8])
     except ValueError:
         print("Done plotting!")
         break
@@ -35,17 +35,17 @@ while True:
     plt.ylim(bottom=0, top=10)
     plt.plot(data[-100:])
 
-    plt.pause(0.015)                                                #Adjust this base on your device's spec so it's sync as much as possible
+    plt.pause(0.0125)                                                #Adjust this base on your device's spec so it's sync as much as possible
 plt.close()
 RaW.NewFolder(folder_name)
 
 with open(text_log_path, 'a') as file:
     file.write("Run at {0}\n".format(time.strftime("%Y-%m-%d %H:%M:%S")))
     file.write("=========\n")
-    file.write("Time  | Value\n")
+    file.write("Time (s) |  Value\n")
 
     for index in range (0,len(data)):
-        file.write("{0:.3f} | {1:.2f}\n".format(time_stamp[index],data[index]))
+        file.write("{0:<9.2f}|  {1:.4f}\n".format(time_stamp[index],data[index]))
 
 print("Text log {0} created!".format(text_log_path))
 
